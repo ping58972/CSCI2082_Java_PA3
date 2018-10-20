@@ -1,12 +1,19 @@
 package edu.century.pa3;
-
+/**public class Driver from the package edu.century.pa3
+ * 	Purpose to build the GUI for check error file program.
+ * 
+ *  Century College, CSCI 2082 Fall 2018.
+ *  Driver.java, Programming Assignment 03.
+ *  
+ *  @author (Ping) Nalongsone Danddank
+ *  @version 1.0
+ *  @since 10/25/2018
+ * */
 import java.awt.EventQueue;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -16,7 +23,6 @@ import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.JButton;
 
 public class Driver implements ActionListener{
@@ -42,8 +48,6 @@ public class Driver implements ActionListener{
 				}
 			}
 		});
-		
-
 	}
 
 	/**
@@ -59,32 +63,23 @@ public class Driver implements ActionListener{
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, BorderLayout.NORTH);
-		
+		frame.getContentPane().add(panel, BorderLayout.NORTH);		
 		JLabel lblNewLabel = new JLabel("Shoose File");
-		panel.add(lblNewLabel);
-		
+		panel.add(lblNewLabel);		
 		btnNewButton = new JButton("Browse");
 		btnNewButton.addActionListener(this);
-		panel.add(btnNewButton);
-		
+		panel.add(btnNewButton);		
 		textField = new JTextField();
 		panel.add(textField);
-		textField.setColumns(10);
-		
+		textField.setColumns(10);		
 		JButton btnNewButton_1 = new JButton("Check Error");
 		btnNewButton_1.addActionListener(this);
-		panel.add(btnNewButton_1);
-		
-		
-		
+		panel.add(btnNewButton_1);		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
-		panel_1.setLayout(new BorderLayout(0, 0));
-		
+		panel_1.setLayout(new BorderLayout(0, 0));		
 		textArea = new JTextArea();
 		textArea.setEditable(false);
 		JScrollPane scrollPane = new JScrollPane(textArea);
@@ -96,13 +91,12 @@ public class Driver implements ActionListener{
 		simpleParser = new SimpleParser(file);
 		textArea.setText("Well Come to Check Error File Program!\n");
 	}
-
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 			if(command.equals("Browse")) {
-				 fileChooser = new JFileChooser();
-				
+				 fileChooser = new JFileChooser();				
 				if(fileChooser.showOpenDialog(null)==fileChooser.APPROVE_OPTION) {
 					textField.setText(fileChooser.getSelectedFile().getName());
 					simpleParser.init(fileChooser.getSelectedFile());
@@ -112,12 +106,7 @@ public class Driver implements ActionListener{
 				textArea.setText("");
 				textArea.append(simpleParser.fileToString()+"\n");
 				textArea.append("***********************************\nResult: ");
-				textArea.append(simpleParser.displayError()+"\n");
-						
-			}
-		
-		
+				textArea.append(simpleParser.displayError()+"\n");						
+			}	
 	}
-	
-
 }
