@@ -7,14 +7,19 @@ public class LinkedStack <T> {
 	private int count;
 	
 	public LinkedStack() {
+		this.head =null;
+
 		count =0;
 	}
 	
 	public void push(T element) {
-		head = new Node(element, head);
+		head = new Node<T>(element, head);
+	
 		count++;
 	}
-	
+	public boolean isEmpty() {
+		return head == null;
+	}
 	public T pop() {
 		if(head == null) {
 			throw new EmptyStackException();
@@ -24,20 +29,24 @@ public class LinkedStack <T> {
 		return top;
 	}
 	public T peek() {
-/*		if(head == null) {
-			throw new EmptyStackException();
-		}*/
+		if(head == null) {
+			return null;
+			//throw new EmptyStackException();
+		}
 		return head.data;
 	}
 	public String toString() {
 		String str ="";
-	for(int i=0; i<count; i++) {
-		str += head.toString() +"\n";
+		Node<T> cur =head;
+	while(cur != null) {
+		str += cur.toString()+" ";
+		cur = cur.link; 
 	}
 	return str;
 	}
 	
-	private class Node<T>{
+	//Inner class
+	public class Node<T>{
 		public T data;
 		public Node<T> link;
 
@@ -64,7 +73,7 @@ public class LinkedStack <T> {
 
 		@Override
 		public String toString() {
-			return data+"\t";
+			return data.toString();
 		}
 		
 	}
