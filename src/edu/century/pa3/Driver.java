@@ -34,6 +34,7 @@ public class Driver implements ActionListener{
 	private JFileChooser fileChooser;
 	File file;
 	JTextArea textArea;
+	JButton btnNewButton_1;
 	/**
 	 * Launch the application.
 	 */
@@ -74,7 +75,7 @@ public class Driver implements ActionListener{
 		textField = new JTextField();
 		panel.add(textField);
 		textField.setColumns(10);		
-		JButton btnNewButton_1 = new JButton("Check Error");
+		btnNewButton_1 = new JButton("Check Error");
 		btnNewButton_1.addActionListener(this);
 		panel.add(btnNewButton_1);		
 		JPanel panel_1 = new JPanel();
@@ -96,17 +97,26 @@ public class Driver implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
 			if(command.equals("Browse")) {
+				btnNewButton_1.setEnabled(true);
 				 fileChooser = new JFileChooser();				
 				if(fileChooser.showOpenDialog(null)==fileChooser.APPROVE_OPTION) {
 					textField.setText(fileChooser.getSelectedFile().getName());
 					simpleParser.init(fileChooser.getSelectedFile());
+					textArea.setText("");
+					textArea.append("Please...Click the Check Error button!");
+				}else {
+					textArea.setText("");
+					textArea.append("Please...Choosing a correct path and file!");
+					btnNewButton_1.setEnabled(false);
 				}
 			}
 			if(command.equals("Check Error")) {
 				textArea.setText("");
 				textArea.append(simpleParser.fileToString()+"\n");
 				textArea.append("***********************************\nResult: ");
-				textArea.append(simpleParser.displayError()+"\n");						
+				textArea.append(simpleParser.displayError()+"\n");	
+				textArea.append("\nClick! Browse button for choose another file!");
+				btnNewButton_1.setEnabled(false);
 			}	
 	}
 }
